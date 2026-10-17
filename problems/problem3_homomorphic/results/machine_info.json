@@ -1,0 +1,7 @@
+{
+  "numpy_version": "2.5.4",
+  "cpu_model": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz",
+  "logical_cpus": "8",
+  "ram_gb": 14.96,
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43"
+}

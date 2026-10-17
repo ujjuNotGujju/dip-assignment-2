@@ -1,22 +1,23 @@
-# Problem 3 — Homomorphic Filtering: Illumination and Reflectance (10 pts)
+# Problem 3 — Homomorphic filtering: illumination and reflectance (10)
 
-Status: **not started**.
+Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
 
-Data: `data/provided/problem3/tunnel_image.jpg` (unevenly lit photo).
+Data: `data/provided/problem3/tunnel_image.jpg` (unevenly lit tunnel photo — bright
+light source + deep shadow in one frame).
 
-## 3.1 The Multiplicative Model (4 pts)
-- [ ] State `I = L*R`; derive why `log I = log L + log R` converts this to an additive
-      problem a linear frequency-domain filter can act on.
-- [ ] Explain why the log must precede the Fourier transform (not filtering in the
-      log-magnitude spectrum after transforming `I` directly).
+## 3.1 The multiplicative model (4)
+- [x] State the model I(x, y) = L(x, y)R(x, y); derive why the log converts this into
+      an additive problem a linear frequency-domain filter can act on.
+- [x] Explain precisely why the log must be taken before the Fourier transform, not
+      after, with a concrete numerical demonstration of what goes wrong otherwise.
 
-## 3.2 Implement and Tune (6 pts)
-- [ ] Implement `H(u,v) = (γH-γL)[1 - exp(-cD²/D0²)] + γL` applied to `log I`, then
-      exponentiate back.
-- [ ] Sweep γL, γH, D0 as an image grid; identify flattening vs. halo settings.
-- [ ] Compare vs. plain global histogram equalisation (reuse Assignment 1 code);
-      local-contrast (local std) comparison table in a shadow region.
+## 3.2 Implement and tune (6)
+- [x] Implement the homomorphic high-frequency-emphasis filter and apply to log I,
+      then exponentiate back.
+- [x] Sweep γL, γH, D0 as an image grid; identify flattening vs. halo settings.
+- [x] Compare against plain global histogram equalisation (implemented from scratch,
+      no Assignment 1 code in this repo to reuse); local-contrast comparison table.
 
 ## Deliverables
-Log-domain derivation; parameter sweep grid with halo cases identified; local-contrast
-comparison table vs. histogram equalisation.
+Derivation of the log-domain argument; parameter sweep grid with halo cases
+identified; local-contrast comparison table against histogram equalisation.

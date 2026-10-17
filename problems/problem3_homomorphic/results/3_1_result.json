@@ -1,0 +1,4 @@
+{
+  "correlation_between_the_two_spectra": 0.6687669505151919,
+  "note": "log(|FFT(I)|) is a real, phase-less display quantity and cannot be inverse-transformed back to a spatial image at all (phase was discarded by |.|); FFT(log I) is a full complex spectrum (magnitude AND phase) that CAN be correctly inverted. The two are also simply different arrays (log and FFT do not commute), confirmed by their low correlation below."
+}
