@@ -5,9 +5,4 @@ __pycache__/
 venv/
 *.egg-info/
 
-# generated outputs (regenerable from code) - keep repo light
-report/figures/*.png
-report/figures/*.pdf
-!report/figures/.gitkeep
-
 .DS_Store

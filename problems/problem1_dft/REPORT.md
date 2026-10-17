@@ -1,4 +1,6 @@
-# DIP Assignment 2 — Report
+# Problem 1 — DFT and the Machinery of Frequency (15 pts)
+
+Status: **done**.
 
 ## Environment
 
@@ -8,22 +10,18 @@
 - Python: 3.14.4
 - NumPy: 2.5.4
 
-(Captured programmatically by `problems/problem1_dft/problem1.py::record_machine_info`,
-saved at `problems/problem1_dft/results/machine_info.json`.)
+(Captured programmatically by `problem1.py::record_machine_info`, saved at
+`results/machine_info.json`.)
 
----
-
-## Problem 1 — DFT and the Machinery of Frequency (15 pts)
-
-Code: [`problems/problem1_dft/problem1.py`](../problems/problem1_dft/problem1.py).
-Figures/tables: `problems/problem1_dft/results/`. Dated pre-implementation prediction:
-[`predictions/1.2_phase_magnitude_prediction.md`](../problems/problem1_dft/predictions/1.2_phase_magnitude_prediction.md).
+Code: [`problem1.py`](problem1.py). Figures/tables: [`results/`](results/). Dated
+pre-implementation prediction:
+[`predictions/1.2_phase_magnitude_prediction.md`](predictions/1.2_phase_magnitude_prediction.md).
 
 The custom DFT (`src/dip_a2/dft.py`) builds the 1-D matrix `W_N[k,n] = exp(-j2πkn/N)`
 and computes the 2-D transform by row-column separability, `F = W_M f W_N^T`, using only
 NumPy array/matrix arithmetic — no call to `numpy.fft` anywhere inside it.
 
-### 1.1 Build and Validate the DFT
+## 1.1 Build and Validate the DFT
 
 **Validation against `numpy.fft.fft2`** on `data/provided/problem1/q1.png` (512x512):
 
@@ -36,7 +34,7 @@ The error is at float64 round-off level (~1e-14 relative), confirming the custom
 separable-matrix DFT is correct, just computed less efficiently (O(N^3) via matrix
 multiplication per row/column pass vs. O(N^2 log N) for the FFT).
 
-#### (a) Conjugate symmetry proof
+### (a) Conjugate symmetry proof
 
 For real-valued `f(x,y)`,
 
@@ -65,7 +63,7 @@ for interpretability, not because it is informationally necessary.
 Numerically verified: `max|F(u,v) − conj(F(-u,-v))|` = **3.3751e-06** (same round-off
 level as the DFT validation above, i.e. the property holds up to floating-point error).
 
-#### (b) Empirical verification of the 2-D Spatial Shift Theorem
+### (b) Empirical verification of the 2-D Spatial Shift Theorem
 
 Theorem: shifting `f` circularly by `(x0, y0)` multiplies its DFT by a linear phase
 ramp, `F_shifted(u,v) = F(u,v) exp(-j2π(u x0/M + v y0/N))`. Verified on the test image
@@ -82,7 +80,7 @@ for five shifts:
 All errors are at float64 round-off level, confirming the theorem holds exactly (up to
 numerical precision) for the custom DFT.
 
-#### Empirical verification of the 2-D Circular Convolution Theorem
+### Empirical verification of the 2-D Circular Convolution Theorem
 
 A 3x3 Laplacian kernel was circularly convolved with the test image two independent
 ways: (i) directly in the spatial domain via explicit shifted sums (`np.roll`-based,
@@ -97,7 +95,7 @@ taking both DFTs, multiplying, and inverting.
 Confirms `f ⊛ h ↔ F · H` (circular convolution in space = multiplication in frequency)
 to numerical precision.
 
-#### (c) Sinusoid parameter recovery
+### (c) Sinusoid parameter recovery
 
 A 512x512 image was synthesized as a sum of 3 real 2-D cosines plus a constant 128
 background, with ground truth recorded **before** any DFT was taken
@@ -136,17 +134,17 @@ grid simply cannot resolve two frequencies closer together than one full cycle
 difference across the whole image; this is the discrete analogue of the
 uncertainty-principle trade-off between time/space extent and frequency resolution.
 
-Figure: `problems/problem1_dft/results/1_1c_sinusoid_and_spectrum.png` shows the
-synthetic image and its log-magnitude spectrum with 3 sharp peak pairs (plus their
-Hermitian-symmetric mirrors), exactly as predicted.
+Figure: `results/1_1c_sinusoid_and_spectrum.png` shows the synthetic image and its
+log-magnitude spectrum with 3 sharp peak pairs (plus their Hermitian-symmetric
+mirrors), exactly as predicted.
 
 ---
 
-### 1.2 Phase vs. Magnitude Information Isolation
+## 1.2 Phase vs. Magnitude Information Isolation
 
 **Pre-implementation prediction** (dated 2026-10-18, written before running this
 section): see
-[`predictions/1.2_phase_magnitude_prediction.md`](../problems/problem1_dft/predictions/1.2_phase_magnitude_prediction.md).
+[`predictions/1.2_phase_magnitude_prediction.md`](predictions/1.2_phase_magnitude_prediction.md).
 Summary of the prediction: by the Convolution Theorem, reconstructing with the test
 image's phase and the noise's magnitude is equivalent to a circular convolution of the
 flat-magnitude phase-only image with the inverse transform of the noise-magnitude
@@ -154,9 +152,9 @@ spectrum; since a white-noise magnitude spectrum is flat only *on average* (not 
 for one realization), the prediction was that the result would look like the
 flat-magnitude reconstruction (clear structure) with extra fine speckle on top.
 
-#### (a) Phase of test image + flat magnitude, vs. noise magnitude
+### (a) Phase of test image + flat magnitude, vs. noise magnitude
 
-Figure: `problems/problem1_dft/results/1_2_phase_magnitude.png`.
+Figure: `results/1_2_phase_magnitude.png`.
 
 - **Phase + flat (constant) magnitude**: reconstructs a sharp, recognizable,
   high-pass-like rendition of the original image — essentially an edge map, since a
@@ -169,19 +167,19 @@ Figure: `problems/problem1_dft/results/1_2_phase_magnitude.png`.
   from the noise magnitude spectrum's deviation from perfectly flat).
 
 **Why flat magnitude isolates phase more cleanly than swapping magnitudes between two
-natural images:** a *natural* image's magnitude spectrum is strongly non-flat (concentrated
-at low frequencies, see §2.1b's power-retention analysis), so swapping it onto another
-image's phase still imposes a highly structured frequency weighting — i.e. a *second*
-image's energy distribution is superimposed on the first image's phase, producing a
-hybrid that contains large-scale shape leakage from the magnitude-donor image. A
-perfectly flat magnitude applies *equal* weight to every frequency, so none of the
-magnitude-donor's structure survives — only the phase's structural information remains,
-giving a cleaner isolation of "what phase alone encodes."
+natural images:** a *natural* image's magnitude spectrum is strongly non-flat
+(concentrated at low frequencies), so swapping it onto another image's phase still
+imposes a highly structured frequency weighting — i.e. a *second* image's energy
+distribution is superimposed on the first image's phase, producing a hybrid that
+contains large-scale shape leakage from the magnitude-donor image. A perfectly flat
+magnitude applies *equal* weight to every frequency, so none of the magnitude-donor's
+structure survives — only the phase's structural information remains, giving a cleaner
+isolation of "what phase alone encodes."
 
-#### (b) Magnitude of test image + zero phase
+### (b) Magnitude of test image + zero phase
 
-Figure: rightmost panel of `1_2_phase_magnitude.png` (log-scaled for display since the
-result is dominated by one huge DC-like peak).
+Figure: rightmost panel of `results/1_2_phase_magnitude.png` (log-scaled for display
+since the result is dominated by one huge DC-like peak).
 
 Setting `∠F(u,v) = 0` means `F(u,v) = |F(u,v)|`, a real, non-negative, even function of
 `(u,v)` (since `|F(u,v)| = |F(-u,-v)|` always holds for any image). A real, even
@@ -196,7 +194,7 @@ by construction, the spectrum of an even function.
 
 ---
 
-### 1.3 Padding, Wraparound, and Computational Overhead
+## 1.3 Padding, Wraparound, and Computational Overhead
 
 A 5x5 Laplacian-type kernel was convolved with the test image three ways: (i) direct
 spatial zero-padded linear convolution (ground truth, no FFT), (ii) correctly
@@ -218,13 +216,13 @@ is 16 — i.e. the convolution there is reading in wrapped-around pixels from th
 edge of the image instead of zeros). This is the expected signature of circular
 wraparound corruption.
 
-Figures: `1_3_padding_wraparound.png` (full images — wraparound is visible as a faint
-dark/bright seam along the left edge of the circular-convolution result) and
-`1_3_border_zoom.png` (zoomed top rows — the direct/padded result is near-black at the
-very top edge while the circular result shows visibly lighter corruption, since it is
-mixing in content from the bottom of the image).
+Figures: `results/1_3_padding_wraparound.png` (full images — wraparound is visible as a
+faint dark/bright seam along the left edge of the circular-convolution result) and
+`results/1_3_border_zoom.png` (zoomed top rows — the direct/padded result is near-black
+at the very top edge while the circular result shows visibly lighter corruption, since
+it is mixing in content from the bottom of the image).
 
-#### (a) Minimal zero-padding derivation
+### (a) Minimal zero-padding derivation
 
 For an `N×N` image and an `M×M` kernel, linear convolution produces a result supported
 on indices `0 ... N+M-2` in each dimension (`N` possible kernel positions over the
@@ -247,7 +245,7 @@ N_x,pad = N_y,pad = N + M - 1
 `results/1_3_results.json`, and used for the "zero-padded DFT conv" result above, which
 matches the ground truth to float64 precision — confirming the derivation.)
 
-#### (b) Computational trade-off
+### (b) Computational trade-off
 
 With `P = N+M-1 = 516` against `N = 512`:
 
@@ -272,18 +270,10 @@ floor derived here.
 
 ---
 
-### Deliverables checklist (Problem 1)
+## Deliverables checklist
 
 - [x] Quantitative error table vs. `numpy.fft.fft2` — §1.1.
 - [x] Shift-theorem and convolution-theorem verification tables — §1.1(b).
 - [x] Dated written prediction + reconstruction plots + reconciliation — §1.2.
 - [x] Recovered sinusoid parameters + Δf derivation — §1.1(c).
 - [x] Wraparound-corruption images + full padding-size derivation — §1.3.
-
----
-
-## Problems 2–7
-
-Scaffolded only (see `problems/problem{2..7}_*/README.md` for each problem's checklist).
-Problem 7 (Lens Distortion) additionally needs instructor confirmation — see
-`problems/problem7_lens_distortion/README.md`.
