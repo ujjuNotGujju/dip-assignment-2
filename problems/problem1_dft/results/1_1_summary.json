@@ -1,0 +1,39 @@
+{
+  "dft_validation_max_abs_err": 3.3699800903236914e-06,
+  "dft_validation_rel_err": 9.960779098093981e-14,
+  "conjugate_symmetry_max_err": 3.3751316419463103e-06,
+  "shift_theorem_rows": [
+    {
+      "x0": 1,
+      "y0": 0,
+      "max_abs_err": 6.249045400913278e-07,
+      "rel_err": 1.8470542597917413e-14
+    },
+    {
+      "x0": 0,
+      "y0": 1,
+      "max_abs_err": 9.538055833571111e-07,
+      "rel_err": 2.819199658071659e-14
+    },
+    {
+      "x0": 5,
+      "y0": 3,
+      "max_abs_err": 1.169778675271904e-06,
+      "rel_err": 3.4575595895954586e-14
+    },
+    {
+      "x0": 17,
+      "y0": 40,
+      "max_abs_err": 1.3786360969088218e-06,
+      "rel_err": 4.074887462212946e-14
+    },
+    {
+      "x0": 100,
+      "y0": 200,
+      "max_abs_err": 5.0668935910497775e-06,
+      "rel_err": 1.4976411260977878e-13
+    }
+  ],
+  "convolution_theorem_max_abs_err": 1.1432632618380012e-10,
+  "convolution_theorem_rel_err": 2.6963756175424554e-13
+}

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+
+# generated outputs (regenerable from code) - keep repo light
+report/figures/*.png
+report/figures/*.pdf
+!report/figures/.gitkeep
+
+.DS_Store

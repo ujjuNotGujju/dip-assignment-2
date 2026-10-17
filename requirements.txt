@@ -1,0 +1,6 @@
+numpy
+matplotlib
+scipy      # validation/comparison only, never for the operations being implemented
+scikit-image  # validation/comparison only (e.g. SSIM), never for the operations being implemented
+opencv-python # validation/comparison only, never for the operations being implemented
+jupyter

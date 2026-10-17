@@ -1,0 +1,20 @@
+{
+  "kernel_size": [
+    5,
+    5
+  ],
+  "image_size": [
+    512,
+    512
+  ],
+  "min_padded_size": [
+    516,
+    516
+  ],
+  "err_padded_vs_direct": 7.851213013054803e-10,
+  "err_circ_vs_direct_whole": 1607.9999999996114,
+  "err_circ_vs_direct_interior": 5.384208634495735e-10,
+  "err_circ_vs_direct_border": 1607.9999999996114,
+  "memory_factor": 1.01568603515625,
+  "runtime_ratio_nlogn": 1.0169530758836425
+}

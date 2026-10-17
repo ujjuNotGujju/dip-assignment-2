@@ -1,0 +1,16 @@
+{
+  "flat_magnitude_constant": 7071.551384105429,
+  "g_flat_phase_range": [
+    -111.17579558146844,
+    157.8865439035614
+  ],
+  "g_noise_mag_range": [
+    -541.8684080401384,
+    776.5099795596573
+  ],
+  "g_zero_phase_range": [
+    9.547618105352171,
+    7071.551384105429
+  ],
+  "g_zero_phase_peak_at_origin": true
+}
