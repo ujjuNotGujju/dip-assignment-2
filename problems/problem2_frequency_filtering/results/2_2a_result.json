@@ -1,0 +1,30 @@
+[
+  {
+    "D0": 10,
+    "measured_overshoot_pct": 3.4398555252366805,
+    "predicted_overshoot_pct": 8.948987202741117,
+    "measured_peak_dist_px": 50,
+    "predicted_peak_dist_px": 51.2
+  },
+  {
+    "D0": 20,
+    "measured_overshoot_pct": 11.446786518478499,
+    "predicted_overshoot_pct": 8.948987202741117,
+    "measured_peak_dist_px": 26,
+    "predicted_peak_dist_px": 25.6
+  },
+  {
+    "D0": 40,
+    "measured_overshoot_pct": 8.268812939423356,
+    "predicted_overshoot_pct": 8.948987202741117,
+    "measured_peak_dist_px": 12,
+    "predicted_peak_dist_px": 12.8
+  },
+  {
+    "D0": 80,
+    "measured_overshoot_pct": 8.77911483842746,
+    "predicted_overshoot_pct": 8.948987202741117,
+    "measured_peak_dist_px": 6,
+    "predicted_peak_dist_px": 6.4
+  }
+]

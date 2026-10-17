@@ -1,0 +1,32 @@
+[
+  {
+    "n": 1,
+    "measured_overshoot_pct": 9.302373011147816e-06,
+    "kernel_ratio_minabs_over_max": 2.5190771053328734e-06
+  },
+  {
+    "n": 2,
+    "measured_overshoot_pct": 3.359016669890328,
+    "kernel_ratio_minabs_over_max": 0.04320694942895181
+  },
+  {
+    "n": 3,
+    "measured_overshoot_pct": 5.603169578899326,
+    "kernel_ratio_minabs_over_max": 0.09663924007229457
+  },
+  {
+    "n": 5,
+    "measured_overshoot_pct": 7.499478619573741,
+    "kernel_ratio_minabs_over_max": 0.1577476060389601
+  },
+  {
+    "n": 10,
+    "measured_overshoot_pct": 8.486465735608817,
+    "kernel_ratio_minabs_over_max": 0.19994655378141557
+  },
+  {
+    "n": 20,
+    "measured_overshoot_pct": 8.433711972740488,
+    "kernel_ratio_minabs_over_max": 0.21235702765389475
+  }
+]

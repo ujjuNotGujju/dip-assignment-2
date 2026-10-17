@@ -1,0 +1,15 @@
+{
+  "D0": 40.0,
+  "analytic": {
+    "ideal_at_D0": 1.0,
+    "butterworth_at_D0": 0.5,
+    "gaussian_at_D0": 0.6065306597126334
+  },
+  "numeric": {
+    "ideal_at_D0_numeric": 1.0,
+    "butterworth_at_D0_numeric": 0.5,
+    "gaussian_at_D0_numeric": 0.6065306597126334
+  },
+  "D0_prime_matched": 33.972872011520764,
+  "H_gauss_matched_at_D0": 0.5
+}
