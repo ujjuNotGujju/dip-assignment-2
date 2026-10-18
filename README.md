@@ -2,7 +2,9 @@
 
 Digital Image Processing, Assignment 2. Full spec: [docs/DIP_A2.pdf](docs/DIP_A2.pdf).
 Released 2026-10-08, due 2026-10-29. Report+code 50%, viva 50%; **viva mark caps the
-report mark per problem**.
+report mark per problem**. The assignment has 6 problems — the PDF's table of contents
+lists a "Problem 7 — Lens Distortion," but that's a typo/leftover with no actual
+problem text in the document (confirmed with the instructor).
 
 ## Progress
 
@@ -16,7 +18,6 @@ Each problem has its own report at `problems/problemN_*/REPORT.md`.
 | 4 | Edge-preserving smoothing | **done** | [REPORT.md](problems/problem4_edge_preserving/REPORT.md) |
 | 5 | Denoising and the Wiener filter | mostly done — real noisy photo pending | [REPORT.md](problems/problem5_wiener/REPORT.md) |
 | 6 | Motion blur and deblurring | mostly done — real blurred photo pending | [REPORT.md](problems/problem6_motion_blur/REPORT.md) |
-| 7 | Lens distortion | blocked — spec missing | [REPORT.md](problems/problem7_lens_distortion/REPORT.md) |
 
 ## Rules (strict — see the PDF for full wording)
 
@@ -32,11 +33,6 @@ Each problem has its own report at `problems/problemN_*/REPORT.md`.
   written and committed **before** the corresponding experiment is run.
 - Problem-specific subtasks call for self-synthesized images (not external ones) or
   self-captured photos — see each problem's README.
-
-> **Note:** the PDF's table of contents lists **Problem 7 — Lens Distortion (10 pts)**
-> but the document contains no detailed problem text for it. Flagged in
-> `problems/problem7_lens_distortion/README.md` — confirm with the instructor before
-> starting that problem.
 
 ## Structure
 
