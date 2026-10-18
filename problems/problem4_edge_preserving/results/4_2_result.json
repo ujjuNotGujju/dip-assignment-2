@@ -1,0 +1,29 @@
+{
+  "temperature": 15.0,
+  "tv_classical_near_edge": 6.332254057641816,
+  "tv_soft_near_edge": 5.779487533851511,
+  "operation_counts": {
+    "classical_kuwahara": {
+      "window_taps": 100,
+      "additions": 200,
+      "multiplications": 100,
+      "exponentiations": 0,
+      "comparisons": 3
+    },
+    "soft_kuwahara": {
+      "window_taps": 100,
+      "additions": 204,
+      "multiplications": 104,
+      "exponentiations": 4,
+      "comparisons": 0
+    },
+    "bilateral": {
+      "window_taps": 2401,
+      "additions": 7203,
+      "multiplications": 4802,
+      "exponentiations": 2401,
+      "comparisons": 0,
+      "note": "w=49 (window span for a representative sigma_s~8)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "noise_sigma": 20.0,
+  "subwindow_size": 5,
+  "flat_slice": [
+    [
+      30,
+      60
+    ],
+    [
+      30,
+      60
+    ]
+  ],
+  "kuwahara_variance_reduction": 22.033993506933825,
+  "bilateral_sigma_s_matched": 4.5,
+  "bilateral_sigma_r": 40.0,
+  "bilateral_variance_reduction_at_match": 22.472637161515404,
+  "psnr": {
+    "kuwahara": 35.404407390111416,
+    "bilateral": 34.571690921384615
+  },
+  "ssim": {
+    "kuwahara": 0.8496877589860797,
+    "bilateral": 0.7876949312991992
+  }
+}

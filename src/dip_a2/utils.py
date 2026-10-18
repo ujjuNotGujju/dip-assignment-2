@@ -9,6 +9,30 @@ def zero_pad_to(img: np.ndarray, shape: tuple) -> np.ndarray:
     return out
 
 
+def convolve2d_valid(img: np.ndarray, kernel: np.ndarray) -> np.ndarray:
+    """'Valid'-mode 2-D convolution (no padding, output shrinks by kernel_size-1),
+    via the shifted-offset-sum pattern: loop over the (small) kernel, not pixels.
+    """
+    kH, kW = kernel.shape
+    H, W = img.shape
+    out = np.zeros((H - kH + 1, W - kW + 1), dtype=np.float64)
+    for i in range(kH):
+        for j in range(kW):
+            w = kernel[i, j]
+            if w == 0:
+                continue
+            out += w * img[i:i + out.shape[0], j:j + out.shape[1]]
+    return out
+
+
+def gaussian_kernel2d(size: int, sigma: float) -> np.ndarray:
+    """Normalized 2-D Gaussian kernel of shape (size, size), from scratch."""
+    ax = np.arange(size) - (size - 1) / 2.0
+    xx, yy = np.meshgrid(ax, ax)
+    kernel = np.exp(-(xx ** 2 + yy ** 2) / (2.0 * sigma ** 2))
+    return kernel / kernel.sum()
+
+
 def histogram_equalize(image: np.ndarray) -> np.ndarray:
     """Global histogram equalization on an 8-bit-range image, from scratch.
 
