@@ -1,0 +1,32 @@
+{
+  "sigma": 20,
+  "misspecification_table": {
+    "under (0.5x Snn)": {
+      "scale": 0.5,
+      "psnr": 25.870324471268148,
+      "ssim": 0.5508587560305602
+    },
+    "correct (1x Snn)": {
+      "scale": 1.0,
+      "psnr": 28.0111615251322,
+      "ssim": 0.6905167421828151
+    },
+    "over (2x Snn)": {
+      "scale": 2.0,
+      "psnr": 26.477207508861625,
+      "ssim": 0.643113457040965
+    }
+  },
+  "edge_region_slice": [
+    [
+      200,
+      240
+    ],
+    [
+      0,
+      40
+    ]
+  ],
+  "real_noisy_photo": null,
+  "real_noisy_photo_status": "PENDING - needs a real captured photo"
+}

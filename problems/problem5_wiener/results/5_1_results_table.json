@@ -1,0 +1,110 @@
+{
+  "5": {
+    "wiener": {
+      "psnr": 35.49705714210103,
+      "ssim": 0.912161386823259,
+      "oracle_tuned": false
+    },
+    "gaussian_lpf": {
+      "psnr": 27.705445565002922,
+      "ssim": 0.7293171271774831,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "butterworth_lpf": {
+      "psnr": 27.065586849635555,
+      "ssim": 0.6882101669824631,
+      "n": 2,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "bilateral": {
+      "psnr": 35.62702618666506,
+      "ssim": 0.9138707856911968,
+      "sigma_s": 0.5,
+      "sigma_r": 12.5,
+      "oracle_tuned": true
+    }
+  },
+  "10": {
+    "wiener": {
+      "psnr": 31.255310865722254,
+      "ssim": 0.8152885096916626,
+      "oracle_tuned": false
+    },
+    "gaussian_lpf": {
+      "psnr": 27.57933727897165,
+      "ssim": 0.7173547557574358,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "butterworth_lpf": {
+      "psnr": 26.980597056922928,
+      "ssim": 0.6808236675861504,
+      "n": 2,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "bilateral": {
+      "psnr": 31.689879884957072,
+      "ssim": 0.8386147097512061,
+      "sigma_s": 1.5714285714285714,
+      "sigma_r": 25.0,
+      "oracle_tuned": true
+    }
+  },
+  "20": {
+    "wiener": {
+      "psnr": 28.0111615251322,
+      "ssim": 0.6905167421828151,
+      "oracle_tuned": false
+    },
+    "gaussian_lpf": {
+      "psnr": 27.099505480976134,
+      "ssim": 0.6746407391427417,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "butterworth_lpf": {
+      "psnr": 26.647985192790024,
+      "ssim": 0.6527708900583874,
+      "n": 2,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "bilateral": {
+      "psnr": 28.68670946871447,
+      "ssim": 0.7110264889243878,
+      "sigma_s": 1.5714285714285714,
+      "sigma_r": 50.0,
+      "oracle_tuned": true
+    }
+  },
+  "40": {
+    "wiener": {
+      "psnr": 25.71548539823023,
+      "ssim": 0.5757549112244219,
+      "oracle_tuned": false
+    },
+    "gaussian_lpf": {
+      "psnr": 25.65679289748288,
+      "ssim": 0.5739263616998042,
+      "D0": 134.44444444444446,
+      "oracle_tuned": true
+    },
+    "butterworth_lpf": {
+      "psnr": 25.56749042939331,
+      "ssim": 0.575413276487346,
+      "n": 2,
+      "D0": 150.0,
+      "oracle_tuned": true
+    },
+    "bilateral": {
+      "psnr": 26.011611707492857,
+      "ssim": 0.5455954500047587,
+      "sigma_s": 2.642857142857143,
+      "sigma_r": 100.0,
+      "oracle_tuned": true
+    }
+  }
+}

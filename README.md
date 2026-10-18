@@ -14,7 +14,7 @@ Each problem has its own report at `problems/problemN_*/REPORT.md`.
 | 2 | Frequency-domain filtering | **done** | [REPORT.md](problems/problem2_frequency_filtering/REPORT.md) |
 | 3 | Homomorphic filtering | **done** | [REPORT.md](problems/problem3_homomorphic/REPORT.md) |
 | 4 | Edge-preserving smoothing | **done** | [REPORT.md](problems/problem4_edge_preserving/REPORT.md) |
-| 5 | Denoising and the Wiener filter | scaffolded | [REPORT.md](problems/problem5_wiener/REPORT.md) |
+| 5 | Denoising and the Wiener filter | mostly done — real noisy photo pending | [REPORT.md](problems/problem5_wiener/REPORT.md) |
 | 6 | Motion blur and deblurring | scaffolded | [REPORT.md](problems/problem6_motion_blur/REPORT.md) |
 | 7 | Lens distortion | blocked — spec missing | [REPORT.md](problems/problem7_lens_distortion/REPORT.md) |
 
