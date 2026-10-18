@@ -1,0 +1,13 @@
+{
+  "L": 25.0,
+  "theta_deg": 30.0,
+  "otf_median_abs_err_raster_vs_analytic": 0.013617259927520005,
+  "otf_p99_abs_err_raster_vs_analytic": 0.3645711844919196,
+  "otf_max_abs_err_raster_vs_analytic": 0.5399628472997863,
+  "otf_max_err_freq": [
+    -0.2890625,
+    -0.5
+  ],
+  "snr_db_example": 30.0,
+  "sigma_used": 3.981992849676657
+}
