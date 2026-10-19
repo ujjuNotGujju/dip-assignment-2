@@ -1,8 +1,7 @@
 # Problem 5 — Denoising and the Wiener Filter (15 pts)
 
-Status: **mostly done — one sub-part pending real data** (see §5.2's real-noisy-photo
-case study). No dated pre-implementation prediction is required for this problem —
-the PDF's Problem 5 text contains no "Pre-implementation Task" instruction.
+Status: **done**. No dated pre-implementation prediction is required for this problem
+— the PDF's Problem 5 text contains no "Pre-implementation Task" instruction.
 
 Code: [`problem5.py`](problem5.py). Shared implementation:
 [`src/dip_a2/wiener.py`](../../src/dip_a2/wiener.py). Figures/tables:
@@ -188,26 +187,50 @@ highest-gradient 40×40 block of the clean image — shows the Wiener output not
 softer right at the edge than the clean image, despite being "correctly specified" in
 the global-statistics sense.
 
-### Real noisy photo — **PENDING**
+### Real noisy photo
 
-The PDF requires applying the white-noise Wiener filter to a **genuinely captured**
-noisy photo (not synthetic noise) and comparing qualitatively against the synthetic
-cases, discussing departures from the white/stationary/signal-independent noise
-assumption (shot noise, demosaicing, sharpening, compression).
+A genuine low-light phone photo (`data/own_captures/low_light_noisy.png` — a night
+view from a balcony: a lit building skyline behind a dark, backlit potted plant;
+original capture lightly cropped to remove a ~25-pixel notch-shaped artifact along the
+top edge left over from how the file was exported, before any analysis). Noise power
+was estimated from a flat, dark 40×40 corner patch of the image (the sky region,
+containing no real structure): `σ̂ ≈ 24.5` (8-bit levels) — a substantial noise level,
+consistent with how this photo looks by eye (visibly grainy in the shadows, typical of
+a high-ISO low-light smartphone shot). The white-noise `wiener_denoise` was applied
+directly with this estimated `σ`. Result: `results/5_2_real_noisy_photo.png`.
 
-**This sub-deliverable is explicitly incomplete.** `data/own_captures/` is currently
-empty — no real noisy photo has been supplied. Per the user's explicit choice when
-asked about this during planning, the rest of Problem 5 was completed in full and this
-one sub-part was left pending rather than faked with synthetic noise (which would not
-satisfy the PDF's requirement, and would misrepresent what was actually tested).
-`problem5.py::section_5_2` checks `data/own_captures/` for any image file and will
-process it automatically (estimating noise power from a flat image corner, applying
-`wiener_denoise`, and saving a before/after figure) the next time the script is run
-once a real photo is added — no code changes needed, just drop a file in
-`data/own_captures/` and re-run.
+**Qualitative comparison with the synthetic cases:** the denoised output visibly
+smooths the grain in the dark foreground plant and the sky while keeping the lit
+windows and building silhouettes recognizable — the same qualitative behaviour as the
+synthetic σ=20–40 cases (`results/5_1_comparison_sigma20.png`). No PSNR/SSIM is
+reported here, correctly, since there is no clean, registered reference for a real
+photo to compare against (only the qualitative visual comparison the PDF allows).
 
-**To complete this**: capture a genuinely noisy photo (e.g. a high-ISO/low-light phone
-shot), save it under `data/own_captures/`, and re-run `problem5.py`.
+**Departures from the white, stationary, signal-independent noise assumption** that
+the synthetic experiments don't have to contend with:
+- **Shot noise**: real sensor noise is signal-dependent (Poisson-distributed photon
+  counting noise dominates in bright regions, read noise dominates in dark ones) — so
+  the true noise variance is *not* uniform across the image the way our injected
+  `N(0,σ²)` is, worse specifically in a night photo like this one where brightness
+  varies enormously between the lit windows and the near-black foreground.
+- **Demosaicing and in-camera processing**: a phone's ISP applies demosaicing,
+  noise reduction, and sharpening before the JPEG is even written, which both
+  correlates noise spatially (adjacent pixels are no longer independent, breaking the
+  "white" assumption) and can leave sharpening halos that look like additional
+  high-frequency structure — not noise at all, but something our model would still
+  try to "denoise."
+- **Compression**: this file went through JPEG encoding (and the export step that
+  produced the file also re-processed it), which introduces block-structured
+  quantization artifacts — a very different error structure from continuous additive
+  Gaussian noise, and one a single global `Snn` estimate cannot distinguish from
+  genuine sensor noise.
+
+The Wiener filter still does something visually reasonable here despite all of this
+(because dark, noisy regions are still dominated by comparatively large, roughly
+uniform noise locally), but the clean theoretical guarantees from §5.1 (MMSE optimality
+under the stated stationary, white, signal-independent model) simply don't apply to
+this image in the strict sense — it works in practice as a reasonable heuristic, not
+because the assumptions are actually satisfied.
 
 ---
 
@@ -216,4 +239,4 @@ shot), save it under `data/own_captures/`, and re-run `problem5.py`.
 - [x] Wiener, low-pass, and bilateral PSNR/SSIM table across σ.
 - [x] Filter-parameter settings for every method/σ, oracle-tuned status labeled.
 - [x] Figures showing noise-power mis-specification (under/correct/over).
-- [ ] **Real-noise case study — pending a genuinely captured noisy photo** (see above).
+- [x] Real-noise case study, with a genuinely captured noisy photo (see above).

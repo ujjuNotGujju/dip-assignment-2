@@ -1,8 +1,7 @@
 # Problem 6 — Motion Blur and Deblurring (20 pts)
 
-Status: **mostly done — one sub-part pending real data** (see §6.4). No dated
-pre-implementation prediction is required — the PDF's Problem 6 text contains no
-"Pre-implementation Task" instruction.
+Status: **done**. No dated pre-implementation prediction is required — the PDF's
+Problem 6 text contains no "Pre-implementation Task" instruction.
 
 Code: [`problem6.py`](problem6.py). Shared implementation:
 [`src/dip_a2/motion_blur.py`](../../src/dip_a2/motion_blur.py). Figures/tables:
@@ -182,36 +181,58 @@ near-zero-OTF amplification identified in §6.2.
 
 ---
 
-## 6.4 Estimate the Blur, Then Remove It — **PENDING**
+## 6.4 Estimate the Blur, Then Remove It
 
-The PDF requires a photo the user **genuinely** motion-blurred themselves (camera
-shake or a moving subject — not synthetic blur), from which `(θ,L)` are estimated from
-the log-magnitude spectrum's dark-stripe pattern, a PSF is built from the estimate,
-Wiener deconvolution applied, and a visible model-failure artifact identified and
-discussed (evaluated qualitatively, since no clean reference exists for a real photo).
+**Photo**: `data/own_captures/motion_blur.jpeg` — a genuinely motion-blurred photo of
+a hand swiped quickly in front of the camera, against an otherwise stationary desk
+scene (bottle, plant, figurines, a handwritten name card confirming provenance).
 
-**This sub-deliverable is explicitly incomplete.** `data/own_captures/` is empty — no
-real motion-blurred photo has been supplied. Per the user's explicit choice (asked
-again this turn, consistent with Problem 5's identical situation), the rest of
-Problem 6 was completed in full and this one sub-part was left pending rather than
-faked with synthetic blur (which would not satisfy the PDF's requirement).
+**Estimation method** (`motion_blur.py::estimate_motion_blur`): computes the photo's
+own centred log-magnitude spectrum; for a sweep of candidate angles, projects the
+spectrum radially outward along that angle and scores how periodically it dips (via
+the 1-D FFT power of the profile, excluding DC); takes the angle with the strongest
+periodic dip pattern as the dark-stripe orientation (motion direction is perpendicular
+to that, since the stripes themselves are perpendicular to the motion — derivable
+directly from the zero-line geometry in §6.1: the zero lines run perpendicular to
+`(cosθ,sinθ)`); recovers `L` from the dominant spacing of those dips via the same
+`1/L` relationship derived in §6.1.
 
-`problem6.py::section_6_4` and `motion_blur.py::estimate_motion_blur` are already
-implemented and will run automatically the next time the script executes, once a real
-photo is present in `data/own_captures/` — no code changes needed. The estimator
-works by: computing the photo's own centred log-magnitude spectrum; for a sweep of
-candidate angles, projecting the spectrum radially outward along that angle and
-scoring how periodically it dips (via the 1-D FFT power of the profile, excluding DC);
-taking the angle with the strongest periodic dip pattern as the dark-stripe
-orientation (motion direction is perpendicular to that, since the stripes themselves
-are perpendicular to the motion — stated and derivable from the zero-line geometry in
-§6.1: the zero lines run perpendicular to `(cosθ,sinθ)`); and recovering `L` from the
-dominant spacing of those dips via the same `1/L` relationship derived in §6.1. **This
-estimator has not been validated against real data** (there is none to validate
-against yet) — documented honestly rather than presented as verified.
+**Result**: `θ_est = 99.0°`, `L_est = 2.69px`, deconvolved with `K=0.01`.
+`results/6_4_real_deblur.png`.
 
-**To complete this**: capture a genuinely motion-blurred photo (camera shake or a
-moving subject), save it under `data/own_captures/`, and re-run `problem6.py`.
+### This is itself the model-failure case study
+
+`L_est≈2.7px` is clearly too small — by eye, the blur streak on the hand in the photo
+spans tens of pixels, not 2–3. Looking at the deblurred result confirms this: the hand
+is **barely sharpened at all**, while the already-sharp background (the bottle, the
+chair, the desk edge) picks up a faint fine vertical ringing/over-sharpening texture
+instead — the opposite of what a correctly-estimated deblur should do.
+
+**Why the estimator failed, connected directly to the model's core assumption**: the
+entire linear motion-blur model in §6.1–6.3 assumes the blur is **spatially
+invariant** — the *same* PSF applies to every pixel in the frame. In this photo, that
+assumption is badly violated: only the moving hand is blurred; the desk, bottle, and
+background are sharp. The log-magnitude spectrum used for estimation is a property of
+the **whole image at once** — and since most of the frame (everything except the hand)
+is sharp, the spectrum is dominated by the sharp background's own high-frequency
+content, not by the comparatively small, localized blur signature from the hand. The
+angle-scoring procedure still found *some* best angle (there is always a maximum,
+even a weak/spurious one), but the recovered length is essentially measuring noise in
+the mostly-sharp spectrum rather than the real, much larger, localized blur extent.
+
+This is a direct, concrete illustration of the limitation the PDF asks to connect to:
+a single global `(θ,L)` and a single spatially-invariant Wiener deconvolution **cannot
+correctly handle a photo where the blur itself varies spatially** (here, a moving
+*subject* against a stationary background — one of the PDF's own named causes,
+alongside camera rotation, changing velocity, occlusion, and clipped highlights). A
+real fix would require *segmenting* the moving region first and estimating/deconvolving
+locally — entirely outside the single-global-PSF model this problem builds.
+
+Evaluated qualitatively, as required (no clean reference exists for a real photo):
+the deblurred output is not a successful deblur of the hand, but it *is* a correctly
+diagnosed and explained failure — arguably the most informative possible outcome for
+this sub-task, since it makes the spatially-invariant assumption's real-world fragility
+directly visible rather than just stated.
 
 ---
 
@@ -222,4 +243,6 @@ moving subject), save it under `data/own_captures/`, and re-run `problem6.py`.
 - [x] Synthetic inverse-filter spectrum with predicted zero locations marked.
 - [x] Wiener K sweeps + optimum sensitivity to noise (4 SNR levels, clean monotonic
       trend).
-- [ ] **Real, self-captured blur case study — pending a genuinely captured photo.**
+- [x] Real, self-captured blur case study, with θ, L, deblurred output, and a
+      documented model-failure mode (localized subject motion vs. the global
+      spatially-invariant PSF assumption).

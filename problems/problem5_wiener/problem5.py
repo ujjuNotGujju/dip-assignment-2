@@ -255,7 +255,15 @@ def section_5_2(clean):
     # real noisy photo (own capture) -- graceful skip if absent
     own_dir = DATA / "own_captures"
     image_exts = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp"}
-    own_photos = [p for p in own_dir.iterdir() if p.suffix.lower() in image_exts] if own_dir.exists() else []
+    all_photos = [p for p in own_dir.iterdir() if p.suffix.lower() in image_exts] if own_dir.exists() else []
+    # data/own_captures/ may hold captures for both Problem 5 (noisy) and Problem 6
+    # (motion-blurred); prefer a filename that says which is which, so each script
+    # picks its own photo rather than grabbing whichever iterdir() lists first.
+    own_photos = [p for p in all_photos if "noisy" in p.stem.lower() or "noise" in p.stem.lower()]
+    if not own_photos:
+        own_photos = [p for p in all_photos if "blur" not in p.stem.lower() and "motion" not in p.stem.lower()]
+    if not own_photos:
+        own_photos = all_photos
     real_photo_result = None
     if own_photos:
         photo_path = own_photos[0]

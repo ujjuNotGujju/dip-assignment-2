@@ -27,6 +27,9 @@
       40
     ]
   ],
-  "real_noisy_photo": null,
-  "real_noisy_photo_status": "PENDING - needs a real captured photo"
+  "real_noisy_photo": {
+    "file": "low_light_noisy.png",
+    "estimated_sigma_from_corner_patch": 24.525789201114407
+  },
+  "real_noisy_photo_status": "done"
 }

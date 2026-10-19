@@ -273,7 +273,14 @@ def section_6_3(clean_rgb, H):
 def section_6_4():
     own_dir = DATA / "own_captures"
     image_exts = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp"}
-    own_photos = [p for p in own_dir.iterdir() if p.suffix.lower() in image_exts] if own_dir.exists() else []
+    all_photos = [p for p in own_dir.iterdir() if p.suffix.lower() in image_exts] if own_dir.exists() else []
+    # data/own_captures/ may hold captures for both Problem 5 (noisy) and Problem 6
+    # (motion-blurred); prefer a filename that says which is which.
+    own_photos = [p for p in all_photos if "blur" in p.stem.lower() or "motion" in p.stem.lower()]
+    if not own_photos:
+        own_photos = [p for p in all_photos if "noisy" not in p.stem.lower() and "noise" not in p.stem.lower()]
+    if not own_photos:
+        own_photos = all_photos
 
     if not own_photos:
         log("6.4 PENDING: no real motion-blurred photo found in data/own_captures/ -- "

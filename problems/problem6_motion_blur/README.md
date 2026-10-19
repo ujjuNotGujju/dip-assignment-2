@@ -1,11 +1,10 @@
 # Problem 6 — Motion Blur and Deblurring (20 pts)
 
-Status: **mostly done — one sub-part pending real data**. See [REPORT.md](REPORT.md)
-for the full write-up.
+Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
 
 Data: `data/provided/problem5_6/reference_image.jpg` (shared with Problem 5) + a
-genuinely motion-blurred self-captured photo (`data/own_captures/`) for §6.4 —
-**not yet supplied, see below**.
+genuinely motion-blurred self-captured photo
+(`data/own_captures/motion_blur.jpeg`, a hand swiped in front of the camera) for §6.4.
 
 ## 6.1 Model and Synthesize (5 pts)
 - [x] Derive continuous PSF for linear motion (length L, angle θ); discretize/normalize.
@@ -25,12 +24,13 @@ genuinely motion-blurred self-captured photo (`data/own_captures/`) for §6.4 �
       levels (10/20/30/40 dB) and how it shifts with noise (monotonically, as expected).
 
 ## 6.4 Estimate the Blur, Then Remove It (5 pts)
-- [ ] **PENDING.** `data/own_captures/` is empty; this sub-part is explicitly
-      incomplete (not faked with synthetic blur). `problem6.py` will process any
-      motion-blurred photo dropped into `data/own_captures/` automatically on the next
-      run — no code changes needed, though the blur-estimation algorithm itself has
-      not yet been validated against real data.
+- [x] Estimated θ=99.0°, L=2.69px from the real photo's log-magnitude spectrum;
+      Wiener-deconvolved (K=0.01). The estimate under-measures the true blur extent
+      because the photo's blur is localized to a moving hand against an otherwise
+      sharp background, violating the model's spatially-invariant-PSF assumption —
+      documented as the required model-failure case study (see REPORT.md).
 
 ## Deliverables
 PSF derivation + zero-spacing formula; synthetic inverse-filter spectrum with predicted
-zeros marked; Wiener K sweeps + optimum-vs-noise; real blur case study **(pending)**.
+zeros marked; Wiener K sweeps + optimum-vs-noise; real blur case study with a
+documented model-failure mode.

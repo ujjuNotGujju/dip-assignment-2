@@ -16,8 +16,11 @@ Each problem has its own report at `problems/problemN_*/REPORT.md`.
 | 2 | Frequency-domain filtering | **done** | [REPORT.md](problems/problem2_frequency_filtering/REPORT.md) |
 | 3 | Homomorphic filtering | **done** | [REPORT.md](problems/problem3_homomorphic/REPORT.md) |
 | 4 | Edge-preserving smoothing | **done** | [REPORT.md](problems/problem4_edge_preserving/REPORT.md) |
-| 5 | Denoising and the Wiener filter | mostly done — real noisy photo pending | [REPORT.md](problems/problem5_wiener/REPORT.md) |
-| 6 | Motion blur and deblurring | mostly done — real blurred photo pending | [REPORT.md](problems/problem6_motion_blur/REPORT.md) |
+| 5 | Denoising and the Wiener filter | **done** | [REPORT.md](problems/problem5_wiener/REPORT.md) |
+| 6 | Motion blur and deblurring | **done** | [REPORT.md](problems/problem6_motion_blur/REPORT.md) |
+
+All 6 problems are now fully complete, including the real self-captured photos used in
+Problem 5 §5.2 and Problem 6 §6.4 (`data/own_captures/`).
 
 ## Rules (strict — see the PDF for full wording)
 
