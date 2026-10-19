@@ -1,0 +1,18 @@
+[
+  {
+    "D0": 10,
+    "measured_overshoot_pct": -5.1015850507004266e-08
+  },
+  {
+    "D0": 20,
+    "measured_overshoot_pct": 3.789561257387201e-14
+  },
+  {
+    "D0": 40,
+    "measured_overshoot_pct": 1.8947806286936004e-14
+  },
+  {
+    "D0": 80,
+    "measured_overshoot_pct": 6.515771625951553e-10
+  }
+]

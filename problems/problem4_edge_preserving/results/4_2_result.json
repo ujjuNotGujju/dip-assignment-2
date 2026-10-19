@@ -17,13 +17,21 @@
       "exponentiations": 4,
       "comparisons": 0
     },
-    "bilateral": {
+    "bilateral_matched_sigma_s": {
+      "window_taps": 841,
+      "additions": 2523,
+      "multiplications": 1682,
+      "exponentiations": 841,
+      "comparisons": 0,
+      "note": "w=29 (the ACTUAL sigma_s=4.50 matched in 4.1)"
+    },
+    "bilateral_representative": {
       "window_taps": 2401,
       "additions": 7203,
       "multiplications": 4802,
       "exponentiations": 2401,
       "comparisons": 0,
-      "note": "w=49 (window span for a representative sigma_s~8)"
+      "note": "w=49 (illustrative, larger sigma_s~8, to show the O(w^2) trend)"
     }
   }
 }

@@ -151,6 +151,13 @@ to a pure 1-D band whenever `D0` is small enough to be comparable to that lobe s
 is safely larger than the lobe spacing (`D0=40,80`), the disk behaves essentially like
 the 1-D band and the match is close. Figure: `results/2_2a_profiles.png`.
 
+**Gaussian filter overshoot reconciliation.** The prediction's other explicit claim —
+that the Gaussian LPF shows exactly zero overshoot at any `D0`, since its spatial
+kernel is non-negative and sums to one — was measured directly (same step-edge image,
+same `D0 ∈ {10,20,40,80}`): measured overshoot is **0.0000% at every `D0`**
+(`results/2_2a_gaussian_result.json`), confirming the prediction exactly, in contrast
+to the ideal filter's ~8.95% Gibbs overshoot above.
+
 **Near-corner profile** (same figure, right panel, `D0=40`): the ripple amplitude and
 plateau level are visibly different from the mid-row profile (lower plateau, since this
 row cuts through the square closer to its top edge). This confirms the 1-D argument

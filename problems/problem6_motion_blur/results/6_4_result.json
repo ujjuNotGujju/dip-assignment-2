@@ -2,5 +2,7 @@
   "file": "motion_blur.jpeg",
   "theta_est_deg": 99.0,
   "L_est": 2.694736842105263,
-  "K": 0.01
+  "K": 0.01,
+  "stripe_angle_deg": 9.0,
+  "stripe_spacing_px": 285.0
 }

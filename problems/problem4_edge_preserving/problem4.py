@@ -170,7 +170,7 @@ def dilate_mask(mask, radius):
     return out
 
 
-def section_4_2(clean, noisy, kuwahara_out):
+def section_4_2(clean, noisy, kuwahara_out, sigma_s_matched):
     temperature = 15.0
     soft_out = soft_kuwahara_filter(noisy, SUBWINDOW_SIZE, temperature)
 
@@ -202,7 +202,8 @@ def section_4_2(clean, noisy, kuwahara_out):
     plt.close(fig)
 
     # per-pixel operation counts (analytic, not timed), at the window sizes actually used
-    w = 2 * max(1, int(round(3 * 8.0))) + 1  # representative bilateral window (sigma_s~8 typical)
+    w_repr = 2 * max(1, int(round(3 * 8.0))) + 1  # representative bilateral window (sigma_s~8 typical)
+    w_matched = 2 * max(1, int(round(3 * sigma_s_matched))) + 1  # the ACTUAL sigma_s=4.1 used in 4.1's matched filter
     q = SUBWINDOW_SIZE  # subwindow span
     counts = {
         "classical_kuwahara": {
@@ -219,13 +220,21 @@ def section_4_2(clean, noisy, kuwahara_out):
             "exponentiations": 4,  # softmax over 4 variances
             "comparisons": 0,
         },
-        "bilateral": {
-            "window_taps": w * w,
-            "additions": w * w * 3,
-            "multiplications": w * w * 2,
-            "exponentiations": w * w,  # one range-kernel exp() per tap
+        "bilateral_matched_sigma_s": {
+            "window_taps": w_matched * w_matched,
+            "additions": w_matched * w_matched * 3,
+            "multiplications": w_matched * w_matched * 2,
+            "exponentiations": w_matched * w_matched,
             "comparisons": 0,
-            "note": f"w={w} (window span for a representative sigma_s~8)",
+            "note": f"w={w_matched} (the ACTUAL sigma_s={sigma_s_matched:.2f} matched in 4.1)",
+        },
+        "bilateral_representative": {
+            "window_taps": w_repr * w_repr,
+            "additions": w_repr * w_repr * 3,
+            "multiplications": w_repr * w_repr * 2,
+            "exponentiations": w_repr * w_repr,  # one range-kernel exp() per tap
+            "comparisons": 0,
+            "note": f"w={w_repr} (illustrative, larger sigma_s~8, to show the O(w^2) trend)",
         },
     }
     log(f"4.2 per-pixel operation counts: {json.dumps(counts, indent=2)}")
@@ -369,7 +378,7 @@ def main():
     result_4_1, kuwahara_out, bilateral_out, sigma_s_matched, sigma_r_final = section_4_1(clean, noisy)
 
     log("=== 4.2 ===")
-    section_4_2(clean, noisy, kuwahara_out)
+    section_4_2(clean, noisy, kuwahara_out, sigma_s_matched)
 
     log("=== 4.3 ===")
     section_4_3()

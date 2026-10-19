@@ -124,18 +124,22 @@ edge-sharpness/artifact trade-off seen throughout this problem).
 ### (c) Per-pixel complexity analysis
 
 Analytic operation counts (not timed/profiled), at the window sizes actually used in
-this script (Kuwahara sub-window 5×5 → 100 total taps across 4 sub-windows;
-bilateral window `w×w` with `w=49`, the span for a representative `sigma_s≈8`):
+this script (Kuwahara sub-window 5×5 → 100 total taps across 4 sub-windows). Two
+bilateral rows are given: the **actual** matched filter from §4.1 (`sigma_s=4.50`,
+window span `w=29`) and a larger, illustrative `sigma_s≈8` (`w=49`) to make the `O(w²)`
+scaling trend visible — the matched filter alone would understate how fast this grows:
 
 | algorithm | window taps | additions | multiplications | exponentiations | comparisons |
 |---|---|---|---|---|---|
 | Classical Kuwahara | 100 | 200 | 100 | **0** | 3 (argmin of 4) |
 | Soft Kuwahara | 100 | 204 | 104 | **4** (softmax) | 0 |
-| **Bilateral** | 2401 | 7203 | 4802 | **2401** | 0 |
+| Bilateral (matched, `sigma_s=4.50`, `w=29`) | 841 | 2523 | 1682 | **841** | 0 |
+| Bilateral (illustrative, `sigma_s≈8`, `w=49`) | 2401 | 7203 | 4802 | **2401** | 0 |
 
-**Bilateral is by far the most computationally expensive per pixel**, because it needs
-**one `exp()` evaluation for every single window tap** (`w²` of them — 2401 for a
-49×49 window) to build the data-dependent range kernel fresh at each offset, whereas
+**Bilateral is by far the most computationally expensive per pixel at either window
+size tested**, because it needs **one `exp()` evaluation for every single window tap**
+(`w²` of them — 841 even at the modest matched `sigma_s=4.50`, 2401 at the larger
+illustrative window) to build the data-dependent range kernel fresh at each offset, whereas
 Kuwahara's sub-window statistics (sums and sums-of-squares) only need cheap
 additions/multiplications, with the expensive `exp()` calls limited to a **fixed
 small constant** (0 for the hard-argmin classical version, 4 for the softmax-weighted

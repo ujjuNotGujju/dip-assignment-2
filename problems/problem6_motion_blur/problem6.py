@@ -298,11 +298,43 @@ def section_6_4():
         im = im.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
     real_img = np.asarray(im, dtype=np.float64)
 
-    theta_est, L_est = estimate_motion_blur(real_img)
-    log(f"6.4 estimated theta={theta_est:.1f} deg, L={L_est:.2f} px")
+    theta_est, L_est, diag = estimate_motion_blur(real_img)
+    stripe_angle = diag["stripe_angle_deg"]
+    stripe_spacing = diag["stripe_spacing_px"]
+    log(f"6.4 estimated theta={theta_est:.1f} deg, L={L_est:.2f} px "
+        f"(stripe angle={stripe_angle:.1f} deg, stripe spacing={stripe_spacing:.2f} px)")
     _, H_est = motion_psf_otf(real_img.shape, L_est, theta_est)
     K_est = 0.01
     deblurred = np.clip(np.real(np.fft.ifft2(wiener_deconvolve(np.fft.fft2(real_img), H_est, K_est))), 0, 255)
+
+    # Required deliverable: display the photo's own log-magnitude spectrum with the
+    # estimated stripe spacing marked (dashed lines, one per detected period, running
+    # along the stripe orientation -- perpendicular to the estimated motion direction).
+    M, N = real_img.shape
+    cy, cx = M // 2, N // 2
+    spectrum = np.log1p(np.abs(np.fft.fftshift(np.fft.fft2(real_img))))
+    stripe_dir = np.deg2rad(stripe_angle)           # direction the stripes themselves run
+    motion_dir = np.deg2rad(theta_est)              # direction spacing is measured along
+    max_r = min(cy, cx) - 2
+    n_lines = int(max_r / max(stripe_spacing, 1e-6))
+
+    fig, ax = plt.subplots(figsize=(7, 7))
+    ax.imshow(spectrum, cmap="viridis")
+    for m in range(-n_lines, n_lines + 1):
+        if m == 0:
+            continue
+        px = cx + m * stripe_spacing * np.cos(motion_dir)
+        py = cy + m * stripe_spacing * np.sin(motion_dir)
+        dx, dy = np.cos(stripe_dir), np.sin(stripe_dir)
+        ax.axline((px, py), (px + dx, py + dy), color="red", linewidth=0.7, linestyle="--")
+    ax.set_xlim(0, N); ax.set_ylim(M, 0)
+    ax.set_title(f"log|FFT| with estimated stripe spacing marked\n"
+                 f"(stripe spacing={stripe_spacing:.1f}px -> L_est={L_est:.1f}px, "
+                 f"motion theta_est={theta_est:.1f} deg)")
+    ax.axis("off")
+    fig.tight_layout()
+    fig.savefig(RESULTS / "6_4_spectrum_stripes.png", dpi=150)
+    plt.close(fig)
 
     fig, axes = plt.subplots(1, 2, figsize=(10, 5))
     axes[0].imshow(real_img, cmap="gray"); axes[0].set_title("Real motion-blurred photo"); axes[0].axis("off")
@@ -311,7 +343,8 @@ def section_6_4():
     fig.savefig(RESULTS / "6_4_real_deblur.png", dpi=150)
     plt.close(fig)
 
-    result = {"file": photo_path.name, "theta_est_deg": theta_est, "L_est": L_est, "K": K_est}
+    result = {"file": photo_path.name, "theta_est_deg": theta_est, "L_est": L_est, "K": K_est,
+              "stripe_angle_deg": stripe_angle, "stripe_spacing_px": stripe_spacing}
     (RESULTS / "6_4_result.json").write_text(json.dumps(result, indent=2))
     return result
 

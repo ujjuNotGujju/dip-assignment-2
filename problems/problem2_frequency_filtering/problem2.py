@@ -285,6 +285,30 @@ def section_2_2a(step_img):
     return rows
 
 
+def section_2_2a_gaussian_check(step_img):
+    """Reconcile the prediction's other explicit claim: the Gaussian LPF should show
+    ~0% overshoot (non-negative, sum-to-one spatial kernel) at every D0, unlike the
+    ideal filter's ~8.95% Gibbs overshoot measured in section_2_2a above."""
+    N = step_img.shape[0]
+    P = 2 * N
+    B, A = 200.0, 50.0
+    side = 256
+    edge_col = (N - side) // 2
+    mid_row = N // 2
+
+    rows = []
+    for D0 in [10, 20, 40, 80]:
+        H = make_filter("gaussian", (P, P), float(D0))
+        g = filter_pipeline(step_img, H)
+        profile = g[mid_row, :]
+        overshoot, peak_dist = measure_overshoot(profile, B, A, edge_col)
+        rows.append({"D0": D0, "measured_overshoot_pct": float(overshoot)})
+        log(f"2.2a Gaussian check D0={D0}: measured OS={overshoot:.4f}% (predicted ~0%)")
+
+    (RESULTS / "2_2a_gaussian_result.json").write_text(json.dumps(rows, indent=2))
+    return rows
+
+
 def section_2_2b(step_img):
     N = step_img.shape[0]
     P = 2 * N
@@ -470,6 +494,7 @@ def main():
     step_img = make_step_edge()
     np.save(DATA / "synthetic" / "step_edge.npy", step_img)
     section_2_2a(step_img)
+    section_2_2a_gaussian_check(step_img)
     section_2_2b(step_img)
     section_2_2c(radii)
     section_2_2d()

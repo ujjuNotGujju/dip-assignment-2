@@ -102,4 +102,5 @@ def estimate_motion_blur(image: np.ndarray, n_angles: int = 180):
     L_est = max(M, N) / period_px if period_px > 0 else float("nan")
     # motion direction is perpendicular to the dark-stripe orientation measured above
     motion_theta_deg = (best_theta + 90.0) % 180.0
-    return motion_theta_deg, float(L_est)
+    diagnostics = {"stripe_angle_deg": float(best_theta), "stripe_spacing_px": float(period_px)}
+    return motion_theta_deg, float(L_est), diagnostics

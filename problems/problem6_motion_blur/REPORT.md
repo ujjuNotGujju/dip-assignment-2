@@ -198,7 +198,15 @@ directly from the zero-line geometry in §6.1: the zero lines run perpendicular 
 `1/L` relationship derived in §6.1.
 
 **Result**: `θ_est = 99.0°`, `L_est = 2.69px`, deconvolved with `K=0.01`.
-`results/6_4_real_deblur.png`.
+`results/6_4_real_deblur.png`. The photo's own log-magnitude spectrum, with the
+estimated stripe spacing marked (dashed red lines, drawn perpendicular to `θ_est` and
+spaced at the detected `285.0px` period): `results/6_4_spectrum_stripes.png`. Per the
+derivation in §6.1 (dark stripes run perpendicular to the motion direction, spaced
+`1/L` apart), these lines are only one `1/L`-period apart on each side of DC — i.e.
+only 2 lines fit before leaving the displayed frequency range, because the detected
+period (285px) is unusually large. Visually, these marked lines do **not** line up with
+any clear periodic dark-stripe pattern in the spectrum (there isn't a strong one to
+find) — itself a visual symptom of the same root problem discussed next.
 
 ### This is itself the model-failure case study
 
