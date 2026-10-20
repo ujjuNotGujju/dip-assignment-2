@@ -1,4 +1,4 @@
-# Problem 5 — Denoising and the Wiener Filter (15 pts)
+# Problem 5: Denoising and the Wiener Filter (15 pts)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 

@@ -1,4 +1,4 @@
-# Problem 4 — Edge-Preserving Smoothing: Bilateral vs. Kuwahara (15 pts)
+# Problem 4: Edge-Preserving Smoothing: Bilateral vs. Kuwahara (15 pts)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 

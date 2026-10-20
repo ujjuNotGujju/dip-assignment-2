@@ -1,8 +1,8 @@
-# Problem 3 — Homomorphic filtering: illumination and reflectance (10)
+# Problem 3: Homomorphic filtering: illumination and reflectance (10)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
-Data: `data/provided/problem3/tunnel_image.jpg` (unevenly lit tunnel photo — bright
+Data: `data/provided/problem3/tunnel_image.jpg` (unevenly lit tunnel photo, bright
 light source + deep shadow in one frame).
 
 ## 3.1 The multiplicative model (4)

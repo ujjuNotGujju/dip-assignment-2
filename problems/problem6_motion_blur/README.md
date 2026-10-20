@@ -1,4 +1,4 @@
-# Problem 6 — Motion Blur and Deblurring (20 pts)
+# Problem 6: Motion Blur and Deblurring (20 pts)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
@@ -27,7 +27,7 @@ genuinely motion-blurred self-captured photo
 - [x] Estimated θ=99.0°, L=2.69px from the real photo's log-magnitude spectrum;
       Wiener-deconvolved (K=0.01). The estimate under-measures the true blur extent
       because the photo's blur is localized to a moving hand against an otherwise
-      sharp background, violating the model's spatially-invariant-PSF assumption —
+      sharp background, violating the model's spatially-invariant-PSF assumption;
       documented as the required model-failure case study (see REPORT.pdf).
 
 ## Deliverables

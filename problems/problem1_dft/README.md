@@ -1,10 +1,10 @@
-# Problem 1 — DFT and the Machinery of Frequency (15 pts)
+# Problem 1: DFT and the Machinery of Frequency (15 pts)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data: `data/provided/problem1/q1.png` (standard 512x512 grayscale test image), plus a
 self-synthesized sinusoid-sum image (ground-truth parameters recorded before any DFT
-is taken — no external image for this subtask).
+is taken, no external image for this subtask).
 
 ## 1.1 Build and Validate the DFT (6 pts)
 - [x] Custom 1-D DFT matrix `W_N`; 2-D DFT via `F = W_N f W_N^T`.

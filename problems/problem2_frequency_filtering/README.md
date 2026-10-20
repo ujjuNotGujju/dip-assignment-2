@@ -1,4 +1,4 @@
-# Problem 2 — Frequency-Domain Filtering: Ideal, Butterworth, Gaussian (15 pts)
+# Problem 2: Frequency-Domain Filtering: Ideal, Butterworth, Gaussian (15 pts)
 
 Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
@@ -8,7 +8,7 @@ Data: `data/provided/problem2/` (`characters_test_pattern`, `text_gaps`, `thumb_
 
 Pipeline (per the PDF): pad each NxN image to PxP with P=2N, center the spectrum,
 multiply by a real zero-phase filter H(u,v), invert, take the real part, crop. Every
-transfer function must be built from its formula — no library filter routines except
+transfer function must be built from its formula; no library filter routines except
 where a subtask explicitly asks for a comparison (2.2d vs
 `scipy.ndimage.gaussian_filter`).
 
