@@ -1,6 +1,6 @@
 # Problem 5 — Denoising and the Wiener Filter (15 pts)
 
-Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
+Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data: `data/provided/problem5_6/reference_image.jpg` (clean RGB, >=1024x1024, shared
 with Problem 6) + a genuinely noisy self-captured photo

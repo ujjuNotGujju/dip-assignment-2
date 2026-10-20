@@ -1,6 +1,6 @@
 # Problem 1 — DFT and the Machinery of Frequency (15 pts)
 
-Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
+Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data: `data/provided/problem1/q1.png` (standard 512x512 grayscale test image), plus a
 self-synthesized sinusoid-sum image (ground-truth parameters recorded before any DFT

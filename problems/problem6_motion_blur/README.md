@@ -1,6 +1,6 @@
 # Problem 6 — Motion Blur and Deblurring (20 pts)
 
-Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
+Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data: `data/provided/problem5_6/reference_image.jpg` (shared with Problem 5) + a
 genuinely motion-blurred self-captured photo
@@ -28,7 +28,7 @@ genuinely motion-blurred self-captured photo
       Wiener-deconvolved (K=0.01). The estimate under-measures the true blur extent
       because the photo's blur is localized to a moving hand against an otherwise
       sharp background, violating the model's spatially-invariant-PSF assumption —
-      documented as the required model-failure case study (see REPORT.md).
+      documented as the required model-failure case study (see REPORT.pdf).
 
 ## Deliverables
 PSF derivation + zero-spacing formula; synthetic inverse-filter spectrum with predicted

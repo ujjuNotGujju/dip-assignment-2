@@ -1,6 +1,6 @@
 # Problem 2 — Frequency-Domain Filtering: Ideal, Butterworth, Gaussian (15 pts)
 
-Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
+Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data: `data/provided/problem2/` (`characters_test_pattern`, `text_gaps`, `thumb_print`,
 `cameraman.tif`), plus a self-synthesized 512x512 step-edge image (B=200 square, side

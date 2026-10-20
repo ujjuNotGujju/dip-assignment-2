@@ -1,6 +1,6 @@
 # Problem 4 — Edge-Preserving Smoothing: Bilateral vs. Kuwahara (15 pts)
 
-Status: **done**. See [REPORT.md](REPORT.md) for the full write-up.
+Status: **done**. See [REPORT.pdf](REPORT.pdf) for the full write-up.
 
 Data & Input: `data/provided/problem4/q4.png` (clean ground-truth image with flat
 regions and sharp boundaries) + synthetic `N(0, 20^2)` additive noise for 4.1/4.2.
